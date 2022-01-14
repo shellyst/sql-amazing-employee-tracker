@@ -1,4 +1,10 @@
-const express = require("express");
-const router = express.Router();
+const mysql = require("mysql2");
 
-module.exports = router;
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  passwword: "",
+  database: "employees",
+});
+
+module.exports = db;
