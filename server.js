@@ -148,4 +148,36 @@ function viewRoles() {
   });
 }
 
-function update() {}
+function update() {
+  db.query("SELECT * FROM employee", (err, res) => {
+    let staff = res.map(({ id, first_name }) => ({ id: id, name: first_name }));
+
+    db.query("SELECT * FROM roles", (err, res) => {
+      let ids = res.map((item) => item.id);
+
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "employee",
+            choices: staff,
+            message: "Which employee would you like to update?",
+          },
+          {
+            type: "list",
+            name: "role",
+            choices: ids,
+            message: "Please select the new role:",
+          },
+        ])
+        .then((answers) => {
+          db.query("UPDATE employee SET ? WHERE ?", [
+            { role_id: answers.id },
+            { id: res.id },
+          ]);
+          console.log("The role was updated.");
+          mainQuestion();
+        });
+    });
+  });
+}
