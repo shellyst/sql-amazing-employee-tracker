@@ -77,11 +77,12 @@ function addEmployee() {
         },
       ])
       .then((answers) => {
-        db.query("INSERT INTO employees SET ?", {
+        db.query("INSERT INTO employee SET ?", {
           first_name: answers.first,
           last_name: answers.last,
           role_id: answers.role_id,
         });
+        mainQuestion();
       });
   });
 }
@@ -108,6 +109,7 @@ function addDepartment() {
         db.query("INSERT INTO department SET ?", {
           name: answers.department,
         });
+        mainQuestion();
       });
   });
 }
@@ -133,6 +135,7 @@ function addRole() {
         name: "salary",
         message: "What is the salary for this role?",
       },
+      // department id?
     ]);
   });
 }
