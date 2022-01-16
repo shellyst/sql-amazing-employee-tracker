@@ -52,15 +52,18 @@ function mainQuestion() {
 }
 
 function viewAll() {
-  db.query("SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;", (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    mainQuestion()
-  })
+  db.query(
+    "SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager FROM employee LEFT JOIN role on employee.role_id = role.id LEFT JOIN department on role.department_id = department.id LEFT JOIN employee manager on manager.id = employee.manager_id;",
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      mainQuestion();
+    }
+  );
 }
 
 function addEmployee() {
-  db.query("SELECT * FROM roles", (err, res) => {
+  db.query("SELECT * FROM role", (err, res) => {
     let ids = res.map((item) => item.id);
 
     inquirer
@@ -129,7 +132,7 @@ function viewDepartments() {
 }
 
 function addRole() {
-  db.query("SELECT * FROM roles;", (err, res) => {
+  db.query("SELECT * FROM role;", (err, res) => {
     inquirer.prompt([
       {
         type: "input",
@@ -147,7 +150,7 @@ function addRole() {
 }
 
 function viewRoles() {
-  db.query("SELECT * FROM roles;", (err, res) => {
+  db.query("SELECT * FROM role;", (err, res) => {
     if (err) throw err;
     console.table(res);
     mainQuestion();
