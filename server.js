@@ -132,9 +132,7 @@ function viewDepartments() {
 }
 
 function addRole() {
-  db.query("SELECT * FROM department;", (err, res) => {
-    let ids = res.map((item) => item.id);
-
+  db.query("SELECT * FROM role;", (err, res) => {
     inquirer
       .prompt([
         {
@@ -147,19 +145,18 @@ function addRole() {
           name: "salary",
           message: "What is the salary for this role?",
         },
-        // department id?
         {
           type: "input",
-          name: "role",
-          choices: ids,
-          message: "What role would you like to add?",
+          name: "department",
+          message:
+            "What department does the role belong to? (1 = Management, 2 = Financial, 3 = Administration, 4 = Sales, 5 = Humanities/Other)",
         },
       ])
       .then((answers) => {
         db.query("INSERT INTO role SET ?", {
           title: answers.title,
           salary: answers.salary,
-          department_id: answers.department_id,
+          department_id: answers.department,
         });
         mainQuestion();
       });
