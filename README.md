@@ -53,7 +53,7 @@ node index.js
 
 ## Demo
 
-[![image.png](https://i.postimg.cc/tgvmSBXg/image.png)](https://postimg.cc/kV8cDFRr)
+[![image.png](https://i.postimg.cc/sXHz2XL5/image.png)](https://postimg.cc/R6tysM40)
 [![Demo]](https://drive.google.com/file/d/1IF-myghmC7E9JuUYd3dkv1CBJXvdUAau/view)
 
 ## Contributors
