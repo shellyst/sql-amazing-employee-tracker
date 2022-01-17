@@ -132,20 +132,37 @@ function viewDepartments() {
 }
 
 function addRole() {
-  db.query("SELECT * FROM role;", (err, res) => {
-    inquirer.prompt([
-      {
-        type: "input",
-        name: "title",
-        message: "What is the title of the role?",
-      },
-      {
-        type: "input",
-        name: "salary",
-        message: "What is the salary for this role?",
-      },
-      // department id?
-    ]);
+  db.query("SELECT * FROM department;", (err, res) => {
+    let ids = res.map((item) => item.id);
+
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "title",
+          message: "What is the title of the role?",
+        },
+        {
+          type: "input",
+          name: "salary",
+          message: "What is the salary for this role?",
+        },
+        // department id?
+        {
+          type: "input",
+          name: "role",
+          choices: ids,
+          message: "What role would you like to add?",
+        },
+      ])
+      .then((answers) => {
+        db.query("INSERT INTO role SET ?", {
+          title: answers.title,
+          salary: answers.salary,
+          department_id: answers.department_id,
+        });
+        mainQuestion();
+      });
   });
 }
 
@@ -161,7 +178,7 @@ function update() {
   db.query("SELECT * FROM employee", (err, res) => {
     let staff = res.map(({ id, first_name }) => ({ id: id, name: first_name }));
 
-    db.query("SELECT * FROM roles", (err, res) => {
+    db.query("SELECT * FROM role", (err, res) => {
       let id = res.map((item) => item.id);
 
       inquirer
