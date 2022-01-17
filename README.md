@@ -55,7 +55,7 @@ node index.js
 
 [![image.png](https://i.postimg.cc/DfqVDxvq/image.png)](https://postimg.cc/NLfP27rM)
 
-[![Demo]](https://drive.google.com/file/d/1IF-myghmC7E9JuUYd3dkv1CBJXvdUAau/view)
+[View the Demo Video](https://drive.google.com/file/d/1IF-myghmC7E9JuUYd3dkv1CBJXvdUAau/view?usp=sharing)
 
 ## Contributors
 
